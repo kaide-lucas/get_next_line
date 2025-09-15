@@ -1,0 +1,172 @@
+NAME = get_next_line.a
+CC = clang
+CFLAGS = -Wall -Wextra -Werror
+
+SRC = get_next_line.c get_next_line_utils.c
+OBJ = $(SRC:.c=.o)
+
+all: $(NAME)
+
+$(NAME): $(OBJ)
+	ar rcs $(NAME) $(OBJ)
+
+clean:
+	rm -f $(OBJ)
+
+fclean: clean
+	rm -f $(NAME)
+
+re: fclean all
+
+--------------------------------------------------------------------------
+
+#ifndef GET_NEXT_LINE_H
+# define GET_NEXT_LINE_H
+
+# include <unistd.h>  // read
+# include <stdlib.h>  // malloc, free
+
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 42
+# endif
+
+char    *get_next_line(int fd);
+size_t  gnl_strlen(const char *s);
+char    *gnl_strchr(const char *s, int c);
+char    *gnl_strjoin(char *s1, char *s2);
+
+#endif
+
+---------------------------------------------------------------------------
+
+/* 
+** ft_strlen:
+** Counts the length of the string 's' (excluding the null terminator).
+** Returns the number of characters.
+*/
+size_t	ft_strlen(const char *s)
+{
+	size_t	i;
+
+	i = 0;
+	while (s[i])
+		i++;
+	return (i);
+}
+
+/* 
+** ft_strchr:
+** Searches for the first occurrence of the character 'c' in the string 's'.
+** Returns a pointer to the character if found, or NULL otherwise.
+*/
+char	*ft_strchr(const char *s, int c)
+{
+	while (*s)
+	{
+		if (*s == (char)c)
+			return ((char *)s);
+		s++;
+	}
+	if (*s == (char)c)
+		return ((char *)s);
+	return (NULL);
+}
+
+/* 
+** ft_strdup:
+** Allocates sufficient memory and creates a copy of the string 's1'.
+** Returns a pointer to the newly allocated string, or NULL if allocation fails.
+*/
+char	*ft_strdup(const char *s1)
+{
+	char	*dup;
+	size_t	len;
+	size_t	i;
+
+	len = ft_strlen(s1);
+	dup = (char *)malloc(sizeof(char) * (len + 1));
+	if (!dup)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		dup[i] = s1[i];
+		i++;
+	}
+	dup[i] = '\0';
+	return (dup);
+}
+
+/* 
+** ft_strjoin:
+** Concatenates 's1' and 's2' into a new string.
+** Allocates memory for the result and returns it.
+** Returns NULL if allocation fails.
+*/
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	char	*res;
+	size_t	i;
+	size_t	j;
+
+	if (!s1 || !s2)
+		return (NULL);
+	res = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (!res)
+		return (NULL);
+	i = 0;
+	while (s1[i])
+	{
+		res[i] = s1[i];
+		i++;
+	}
+	j = 0;
+	while (s2[j])
+		res[i++] = s2[j++];
+	res[i] = '\0';
+	return (res);
+}
+
+------------------------------------------------------------
+
+#include "get_next_line.h"
+
+char    *get_next_line(int fd)
+{
+    static char    *buf;
+    ssize_t        nbytes;
+
+    buf = malloc(BUFFER_SIZE + 1);
+    if (!buf)
+        return (NULL);
+    nbytes = read(fd, buf, BUFFER_SIZE);
+    if (nbytes < 0)
+        return (NULL);
+    if (nbytes == 0)
+    {
+        free(buf);
+        return ("");
+    }
+    buf[nbytes] = '\0';
+    return (buf);
+}
+
+int    main(void)
+{
+    int        fd;
+    char    *line;
+    fd = open("text.txt", O_RDONLY);
+    if (fd < 0)
+    {
+        printf("Erro ao encontrar o arquivo.");
+        return (1);
+    }
+    line = get_next_line(fd);
+    while (line != NULL)
+    {
+        printf("%s\n", line);
+        free(line);
+    }
+    close(fd);
+    return (0);
+}
