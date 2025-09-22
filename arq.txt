@@ -170,3 +170,31 @@ int    main(void)
     close(fd);
     return (0);
 }
+
+-------------------------------------------------------------------------
+char *extract_line(char *stash)
+{
+    size_t i = 0;
+    char *line;
+
+    if (!stash || !stash[0])
+        return NULL;
+
+    // Encontra o fim da linha ou o fim da string
+    while (stash[i] && stash[i] != '\n')
+        i++;
+
+    // Aloca espaço para a linha (inclui o '\n' se existir)
+    line = (char *)malloc(i + (stash[i] == '\n' ? 2 : 1));
+    if (!line)
+        return NULL;
+
+    // Copia os caracteres da linha
+    for (size_t j = 0; j <= i && stash[j]; j++)
+        line[j] = stash[j];
+
+    // Adiciona o terminador nulo
+    line[i + (stash[i] == '\n' ? 1 : 0)] = '\0';
+
+    return line;
+}

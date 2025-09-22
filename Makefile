@@ -2,7 +2,7 @@ NAME = get_next_line.a
 CC = clang
 CFLAGS = -Wall -Wextra -Werror
 
-src = get_next_line.c get_next_line_utilis.
+src = get_next_line.c get_next_line_utilis.c
 OBJ = $(SRC:.c=.o)
 
 all: $(NAME): $(OBJ)
