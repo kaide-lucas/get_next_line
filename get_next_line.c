@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 22:35:57 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/23 19:08:31 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/25 15:36:59 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,27 +15,22 @@
 char	*extract_line(char *stash)
 {
 	size_t	i;
+	size_t	len;
 	char	*line;
 
 	if (!stash || !stash[0])
 		return (NULL);
 	i = 0;
+	len = 0;
 	while (stash[i] && stash[i] != '\n')
 		i++;
 	if (stash[i] == '\n')
-	{
-		line = malloc(i + 2);
-		if (!line)
-			return (NULL);
-		ft_strlcpy(line, stash, i + 2);
-	}
+		len = i + 2;
 	else
-	{
-		line = malloc(i + 1);
-		if (!line)
-			return (NULL);
-		ft_strlcpy(line, stash, i + 1);
-	}
+		line = malloc(len); 
+	if (!line)
+		return (NULL);
+	ft_strlcpy(line, stash, len);
 	return (line);
 }
 
@@ -50,26 +45,22 @@ char	*free_and_null(char *ptr)
 	return (NULL);
 }
 
-char	*clean_stash(char *stash)
+char	*update_stash(char *stash)
 {
 	char	*new_stash;
-	size_t	remaining_result;
-	int		i;
+	size_t	i;
 
 	if (!stash)
 		return (NULL);
 	i = 0;
 	while (stash[i] && stash[i] != '\n')
 		i++;
-	if (stash[i] != '\n')
+	if (!stash[i])
 		return (free_and_null(stash));
-	remaining_result = ft_strlen(stash) - (i + 1);
-	if (remaining_result <= 0)
-		return (free_and_null(stash));
-	new_stash = malloc(remaining_result + 1);
+	new_stash = malloc(ft_strlen(stash) - i + 1);
 	if (!new_stash)
 		return (free_and_null(stash));
-	ft_strlcpy(new_stash, &stash[i + 1], remaining_result + 1);
-	free_and_null(stash);
+	ft_strlcpy(new_stash, &stash[i + 1], ft_strlen(stash) - i);
+	free(stash);
 	return (new_stash);
 }

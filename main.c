@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/22 18:41:03 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/23 18:50:58 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/24 18:43:05 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,18 @@
 
 int	main(void)
 {
-	char	*stash;
-	char	*line;
+    char	*stash = ft_strdup("Linha 1\nLinha 2\nLinha 3 sem quebra");
+    char	*line;
 
-	stash = "Sem novas linhas aqui\n";
-	line = extract_line(stash);
-	if (line)
-	{
-		printf("Extracted line: %s\n", line);
-		free(line);
-	}
-	else
-	{
-		printf("No line extracted.\n");
-	}
-	return (0);
+    while (stash && stash[0])
+    {
+        line = extract_line(stash);
+        if (line)
+        {
+            printf("Extracted line: %s\n", line);
+            free(line);
+        }
+        stash = update_stash(stash);
+    }
+    return (0);
 }

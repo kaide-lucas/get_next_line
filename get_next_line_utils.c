@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 22:30:40 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/23 18:55:58 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/25 15:32:52 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,7 +103,7 @@ char	*ft_strjoin(char const *s1, char const *s2)
 		i++;
 	}
 	j = 0;
-	while (s2[i])
+	while (s2[j])
 		res[i++] = s2[j++];
 	res[i] = '\0';
 	return (res);
