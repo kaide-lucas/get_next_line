@@ -6,7 +6,7 @@
 /*   By: codespace <codespace@student.42.fr>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 22:35:54 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/24 18:26:25 by codespace        ###   ########.fr       */
+/*   Updated: 2025/09/28 16:11:34 by codespace        ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,5 +28,6 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcpy(char *dest, const char *origin, size_t size);
 char	*free_and_null(char *ptr);
 char	*update_stash(char *stash);
+char    *get_next_line(int fd);
 
 #endif
