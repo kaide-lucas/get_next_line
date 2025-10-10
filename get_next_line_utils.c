@@ -6,17 +6,12 @@
 /*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 22:30:40 by codespace         #+#    #+#             */
-/*   Updated: 2025/10/06 17:20:07 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2025/10/10 14:21:59 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-/*
-ft_strlen:
-Counts the length of the string 's' (excluding the null terminator).
-Returns the number of characters.
-*/
 size_t	ft_strlen(const char *s)
 {
 	size_t	i;
@@ -27,11 +22,6 @@ size_t	ft_strlen(const char *s)
 	return (i);
 }
 
-/*
-ft_strchr:
-Searches for the first occurrence of the character 'c' in the string 's'.
-Returns a pointer to the character if found, or NULL otherwise.
-*/
 char	*ft_strchr(const char *s, int c)
 {
 	int				i;
@@ -54,11 +44,6 @@ char	*ft_strchr(const char *s, int c)
 	return (NULL);
 }
 
-/*
-ft_strdup:
-Allocates sufficient memory and creates a copy of the string 's1'.
-Rturns a pointer to the newly allocated string, or NULL if allocation fails.
-*/
 char	*ft_strdup(const char *s1)
 {
 	char	*dup;
@@ -79,12 +64,6 @@ char	*ft_strdup(const char *s1)
 	return (dup);
 }
 
-/*
-ft_strjoin:
-Concatenates 's1' and 's2' into a new string.
-Allocates memory for the result and returns it.
-Returns NULL if allocations fails.
-*/
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	char	*res;
@@ -111,12 +90,6 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	return (res);
 }
 
-/*
-ft_strlcpy:
-Copies up to (size - 1) characters from the string 'origin' to 'dest', 
-ensuring the result is null-terminated. Returns the length of 'origin'. 
-This function helps prevent buffer overflows during string copy operations.
-*/
 size_t	ft_strlcpy(char *dest, const char *origin, size_t size)
 {
 	size_t	i;

@@ -6,7 +6,7 @@
 /*   By: kaidda-s <kaidda-s@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/09/11 22:35:54 by codespace         #+#    #+#             */
-/*   Updated: 2025/09/30 15:10:13 by kaidda-s         ###   ########.fr       */
+/*   Updated: 2025/10/10 14:22:06 by kaidda-s         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ char	*ft_strjoin(char const *s1, char const *s2);
 size_t	ft_strlcpy(char *dest, const char *origin, size_t size);
 char	*free_and_null(char *ptr);
 char	*update_stash(char *stash);
-char	*read_and_join(int fd, char *stash);
+char	*read_and_join(int fd, char *stash, char *buffer);
 char	*get_next_line(int fd);
 
 #endif
